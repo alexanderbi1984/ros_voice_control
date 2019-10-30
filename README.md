@@ -16,7 +16,7 @@ It was currently tested only for linux and ROS Indigo turtlebot
 
 ```
 sudo apt-get install -y python python-dev python-pip build-essential swig libpulse-dev git
-sudo pip install pyaudio
+sudo pip install pyaudio(or sudo apt-get install python-pyaudio)
 sudo pip install pocketsphinx
 ```
 
