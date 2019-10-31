@@ -7,6 +7,7 @@ for ROS turtlebot using pocketsphinx
 import argparse
 import roslib
 import rospy
+from os import path
 
 from geometry_msgs.msg import Twist
 
@@ -35,12 +36,12 @@ class ASRControl(object):
 
         # you may need to change publisher destination depending on what you run
         self.pub_ = rospy.Publisher(pub, Twist, queue_size=10)
-
+        MODELDIR = "/usr/local/lib/python2.7/dist-packages/pocketsphinx/model"
         # initialize pocketsphinx
         config = Decoder.default_config()
-        config.set_string('-hmm', model)
-        config.set_string('-dict', lexicon)
-        config.set_string('-kws', kwlist)
+        config.set_string('-hmm', path.join(MODELDIR,'en-us'))
+        config.set_string('-dict', '/home/alex/catkin_ws/src/ROS/ros_voice_control/voice_cmd.dic')
+        config.set_string('-kws', '/home/alex/catkin_ws/src/ROS/ros_voice_control/voice_cmd.kwlist')
 
         stream = pyaudio.PyAudio().open(format=pyaudio.paInt16, channels=1,
                         rate=16000, input=True, frames_per_buffer=1024)
